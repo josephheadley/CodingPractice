@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Practice of HTML Features</title>
+        <body bgcolor = "#000000">
+            <h1 id = "top" align = "center" style = "color:#FFFFFF">This is heading 1</h1>
+            <h2 align = "right" style = "color:#00FF00">This is heading 2</h2>
+            <h3 align = "left" style = "color:#0000FF">This is</br>heading 3<!--Heading 3 with a line break--></h3>
+            <hr align = "center" size = "10" width = "75%" color = "#FF0000"/>
+            <!--The code above creates a horizontal line with certain specifications-->
+            <h4 align = "left" style = "color:#FF00FF">This is heading 4</h4>
+            <h5 align = "right" style = "color:#FFFF00">This is heading 5</h5>
+            <p align = "center" style = "color:#FFAA66"><big><b>This is a paragraph. I hope this HTML file is useful to review what I've been learning.</big></b></p>
+            <h6 align = "left" style ="color:#00FFFF">This is heading 6</h6>
+            <figure>
+                <a href = "http://www.readms.net" target = "_blank"> <img src = "C:/Users/josep/Downloads/Anime Wallpapers/Boku no Hero Academia 3 (Edited).jpg" align = "center" height = "100%" width = "100%" alt = "The image is of a boy emitting ice from the right half of his body and fire from the left half."> </a>
+                <figcaption>
+                    <cite style = "color:#FFFFFF">Todoroki Shouto: Origin by Kohei Horikoshi </cite>
+                </figcaption>
+            </figure>
+            <a href = "#top"><p align = "center" style ="color:crimson">So the topics that I have learned thus far have been<br></p></a>
+            <ul style = "color:#FFFF00">
+                <li>Line Breaks</li> 
+                <li>Text Formatting</li> 
+                <li>Headings</li>
+                <li>Horizontal Lines</li> 
+                <li>Comments</li> 
+                <li>Attributes</li> 
+                <li>Images</li>
+                <li>(Ordered) Lists</li>
+            </ul>
+        </body>
+    </head>
+</html>
