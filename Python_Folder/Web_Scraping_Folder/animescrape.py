@@ -108,7 +108,7 @@ for match in soup.find_all('div', class_='information di-ib mt4'):
 
     # csv_writer.writerow([ep_num, start_date, end_date, mem_num])
 
-def remove_all(listobj):
+def strip_fat(listobj):
     temp = listobj[:]
     for val in temp:
         if str(val) == '':
@@ -132,9 +132,18 @@ def remove_all(listobj):
     return mins """
 
 def add_genres(gnrs):
-    genre_1.append(gnrs[0])
+    if len(gnrs) == 1:
+        genre_1.append(gnrs[0])
+        genre_2.append(None)
+        genre_3.append(None)
+        genre_4.append(None)
+        genre_5.append(None)
+        genre_6.append(None)
+        genre_7.append(None)
+        genre_8.append(None)
 
     if len(gnrs) == 2:
+        genre_1.append(gnrs[0])
         genre_2.append(gnrs[1])
         genre_3.append(None)
         genre_4.append(None)
@@ -144,6 +153,7 @@ def add_genres(gnrs):
         genre_8.append(None)
 
     if len(gnrs) == 3:
+        genre_1.append(gnrs[0])
         genre_2.append(gnrs[1])
         genre_3.append(gnrs[2])
         genre_4.append(None)
@@ -153,6 +163,7 @@ def add_genres(gnrs):
         genre_8.append(None)
     
     if len(gnrs) == 4:
+        genre_1.append(gnrs[0])
         genre_2.append(gnrs[1])
         genre_3.append(gnrs[2])
         genre_4.append(gnrs[3])
@@ -162,6 +173,7 @@ def add_genres(gnrs):
         genre_8.append(None)
 
     if len(gnrs) == 5:
+        genre_1.append(gnrs[0])
         genre_2.append(gnrs[1])
         genre_3.append(gnrs[2])
         genre_4.append(gnrs[3])
@@ -171,6 +183,7 @@ def add_genres(gnrs):
         genre_8.append(None)
 
     if len(gnrs) == 6:
+        genre_1.append(gnrs[0])
         genre_2.append(gnrs[1])
         genre_3.append(gnrs[2])
         genre_4.append(gnrs[3])
@@ -180,6 +193,7 @@ def add_genres(gnrs):
         genre_8.append(None)
 
     if len(gnrs) == 7:
+        genre_1.append(gnrs[0])
         genre_2.append(gnrs[1])
         genre_3.append(gnrs[2])
         genre_4.append(gnrs[3])
@@ -189,6 +203,7 @@ def add_genres(gnrs):
         genre_8.append(None)
 
     if len(gnrs) == 8:
+        genre_1.append(gnrs[0])
         genre_2.append(gnrs[1])
         genre_3.append(gnrs[2])
         genre_4.append(gnrs[3])
@@ -201,7 +216,7 @@ for url in urls:
     newsoup = bs(requests.get(url).text, 'lxml')
 
     summary = str(newsoup.find('div', class_='js-scrollfix-bottom-rel').table.p.text)
-    synopsis = " ".join(remove_all(re.split(r'\s',summary)))
+    synopsis = " ".join(strip_fat(re.split(r'\s',summary)))
     synopses.append(synopsis)
 
     studio = newsoup.find('span', class_='dark_text')
@@ -219,7 +234,7 @@ for url in urls:
     for item in newsoup.find_all('td', class_ = 'borderClass'):
         season = re.search(r"(Spring|Summer|Fall|Winter).\d{4}", item.text)
         ep_len = re.search(r"(\d{1,2})\s(min|hr)\.\s?([a-z0-9]+)?\s?(\w+)?\.?", item.text)
-        age_rating = re.search(r"(R|PG)\s?[0-9+-]+\s?([0-9+]+)?", item.text)
+        age_rating = re.search(r"(R|PG)(\s|\+|-)+[0-9+]{2,3}", item.text)
         material = re.search(r"(Manga|Visual novel|Game|Original|Novel|Light novel|Web manga|Other)\s{2}", item.text)
 
         if season != None:
@@ -247,7 +262,7 @@ for url in urls:
     if foundmaterial == False:
         materials.append(None)
 
-for i in range(len(names)):
+for i in range(0,len(names)+1):
     csv_writer.writerow([names[i], scores[i], media[i], ep_nums[i], ep_lens[i], start_dates[i], end_dates[i], seasons[i], materials[i], age_ratings[i], mem_nums[i], urls[i], synopses[i], genre_1[i], genre_2[i], genre_3[i], genre_4[i], genre_5[i], genre_6[i], genre_7[i], genre_8[i]])
 
 csv_file.close()

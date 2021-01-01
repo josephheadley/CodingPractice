@@ -145,29 +145,45 @@ def convtomins(hr, minute):
         mins += int(minute)
     return mins
 
-test_source = requests.get("https://myanimelist.net/anime/33050/Fate_stay_night_Movie__Heavens_Feel_-_III_Spring_Song").text
+test_source = requests.get("https://myanimelist.net/anime/2904/Code_Geass__Hangyaku_no_Lelouch_R2").text
 testsoup = bs(test_source, 'lxml')
 
-# for item in soup.find_all('td', class_ = 'borderClass'):
-#     if re.search(r"(Spring|Summer|Fall|Winter).\d{4}", item.text) != None:
-#         print(re.search(r"(Spring|Summer|Fall|Winter).\d{4}", item.text).group(1))
+test_source2 = requests.get("https://myanimelist.net/anime/32935/Haikyuu__Karasuno_Koukou_vs_Shiratorizawa_Gakuen_Koukou").text
+testsoup2 = bs(test_source2, 'lxml')
+
+test_source3 = requests.get("https://myanimelist.net/anime/37491/Gintama__Shirogane_no_Tamashii-hen_-_Kouhan-sen").text
+testsoup3 = bs(test_source3, 'lxml')
+
+test_source4 = requests.get("https://myanimelist.net/anime/37510/Mob_Psycho_100_II").text
+testsoup4 = bs(test_source4, 'lxml')
+
+test_source5 = requests.get("https://myanimelist.net/anime/199/Sen_to_Chihiro_no_Kamikakushi").text
+testsoup5 = bs(test_source5, 'lxml')
+
+for item in testsoup3.find_all('td', class_ = 'borderClass'):
+    if re.search(r"(Spring|Summer|Fall|Winter).\d{4}", item.text) != None:
+        print(re.search(r"(Spring|Summer|Fall|Winter).\d{4}", item.text).group(1))
 
 
-# for item in soup.find_all('td', class_ = 'borderClass'):
-#     eplen = re.search(r"(\d{1,2})\s(\w+)\.\s?([a-z0-9]+)\s?(\w+)\.?", item.text)
-#     if eplen != None:
-#         print(eplen)
-#         # print(convtomins(eplen.group(2), eplen.group(4)))
+for item in testsoup3.find_all('td', class_ = 'borderClass'):
+    eplen = re.search(r"(\d{1,2})\s(\w+)\.\s?([a-z0-9]+)\s?(\w+)\.?", item.text)
+    if eplen != None:
+        print(eplen)
+        # print(convtomins(eplen.group(2), eplen.group(4)))
 
-# for item in soup.find_all('td', class_ = 'borderClass'):
-#     if re.search(r"(R|PG)\s?[0-9+-]+\s?([0-9+]+)?", item.text) != None:
-#         print(re.search(r"(R|PG)\s?[0-9+-]+\s?([0-9+]+)?", item.text).group(0))
+for item in testsoup3.find_all('td', class_ = 'borderClass'):
+    agrating = re.search(r"(R|PG)(\s|\+|-)+([0-9+]{2,3})?", item.text)
+    if agrating != None:
+        if agrating.group(3) != None:
+            print(agrating.group(1) + agrating.group(3))
+        elif agrating.group(1) == "PG" and agrating.group(3) == None:
+            print(agrating.group(1))
 
-# for item in soup.find_all('td', class_ = 'borderClass'):
-#     if re.search(r"(Manga|Visual novel|Game|Original)\s{2}", item.text) != None:
-#         print(re.search(r"(Manga|Visual novel|Game|Original)\s{2}", item.text).group(1))
+for item in testsoup3.find_all('td', class_ = 'borderClass'):
+    if re.search(r"(Manga|Visual novel|Game|Original)\s{2}", item.text) != None:
+        print(re.search(r"(Manga|Visual novel|Game|Original)\s{2}", item.text).group(1))
 
-seasons = []
+""" seasons = []
 ep_lens = []
 age_ratings = []
 materials = []
@@ -208,7 +224,7 @@ if foundmaterial != True:
     materials.append(None)
 
 print(seasons, "\n", ep_lens, "\n", age_ratings, "\n", materials)
-
+"""
 
 """ tree = html.fromstring(source.content)
 season = tree.xpath('/html/body/div[1]/div/div[3]/div[2]/table/tbody/tr/td[1]/div/div[13]/a.text')
